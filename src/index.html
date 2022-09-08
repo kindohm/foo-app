@@ -29,7 +29,14 @@
 
       const main = async () => {
         const launches = await fetchUpcomingLaunches();
-        populateLaunchList([]);
+        var displayStrings = [];
+        for (var i = 0; i < launches.length; i++) {
+          displayStrings.push(
+            "Name: " + launches[i].name + ", Date: " + launches[i].date_utc
+          );
+        }
+
+        populateLaunchList(displayStrings);
       };
 
       main();
