@@ -7,16 +7,33 @@
     <h1>SpaceX Launches</h1>
 
     <script>
-      const API_BASE_URL = "https://api.spacexdata.com/v5/launches";
+      const API_BASE_URL = "https://api.spacexdata.com";
 
       const fetchUpcomingLaunches = async () => {
-        const url = `${API_BASE_URL}/upcoming`;
+        const url = `${API_BASE_URL}/v5/launches/upcoming`;
         const response = await fetch(url);
-        return await response.json();
+        const launches = await response.json();
+
+        var allLaunchStrings = "";
+
+        for (var i = 0; i < launches.length; i++) {
+          var launchString = launches[i].name + "; Payloads: ";
+
+          for (var p = 0; p < launches[i].payloads.length; p++) {
+            var payloadUrl =
+              API_BASE_URL + "/v4/payload/" + launches[i].payloads[p];
+            var payloadResponse = await fetch(payloadUrl);
+            var payloadDetail = await payloadResponse.json();
+            launchString += payloadDetail.name + ", ";
+          }
+
+          allLaunchStrings += launchString;
+        }
       };
 
       const main = async () => {
-        const launches = await fetchUpcomingLaunches();
+        const launchNamesWithPayloads = await fetchUpcomingLaunches();
+        console.log(launchNamesWithPayloads);
       };
 
       main();
