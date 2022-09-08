@@ -5,7 +5,6 @@
   </head>
   <body>
     <h1>SpaceX Launches</h1>
-    <ul id="launch-list"></ul>
 
     <script>
       const API_BASE_URL = "https://api.spacexdata.com/v5/launches";
@@ -14,17 +13,6 @@
         const url = `${API_BASE_URL}/upcoming`;
         const response = await fetch(url);
         return await response.json();
-      };
-
-      const populateLaunchList = (launchStrings) => {
-        const list = document.getElementById("launch-list");
-
-        launchStrings.forEach((name) => {
-          const item = document.createElement("li");
-          const text = document.createTextNode(name);
-          item.appendChild(text);
-          list.appendChild(item);
-        });
       };
 
       const sumLaunchCoreCounts = (launches) => {
@@ -41,10 +29,9 @@
 
       const main = async () => {
         const launches = await fetchUpcomingLaunches();
-        populateLaunchList([]);
 
         const counts = sumLaunchCoreCounts(launches);
-        // todo: display counts
+        console.log(counts);
       };
 
       main();
