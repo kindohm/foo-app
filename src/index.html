@@ -27,9 +27,24 @@
         });
       };
 
+      const sumLaunchCoreCounts = (launches) => {
+        var counts = {};
+        for (var i = 0; i < launches.length; i++) {
+          var coreCount = launches[i].cores.length;
+          if (counts[coreCount] == null) {
+            counts[coreCount] = 0;
+          }
+          counts[coreCount]++;
+        }
+        return counts;
+      };
+
       const main = async () => {
         const launches = await fetchUpcomingLaunches();
         populateLaunchList([]);
+
+        const counts = sumLaunchCoreCounts(launches);
+        // todo: display counts
       };
 
       main();
