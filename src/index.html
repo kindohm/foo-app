@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1>SpaceX Launches</h1>
-    <ul id="launch-list"></ul>
+    <ul id="launch-names"></ul>
 
     <script>
       const API_BASE_URL = "https://api.spacexdata.com/v5/launches";
@@ -16,12 +16,12 @@
         return await response.json();
       };
 
-      const populateLaunchList = (launches) => {
-        const list = document.getElementById("launch-list");
+      const populateLaunchNames = (names) => {
+        const list = document.getElementById("launch-names");
 
-        launches.forEach((launch) => {
+        names.forEach((name) => {
           const item = document.createElement("li");
-          const text = document.createTextNode(launch.name);
+          const text = document.createTextNode(name);
           item.appendChild(text);
           list.appendChild(item);
         });
@@ -29,7 +29,7 @@
 
       const main = async () => {
         const launches = await fetchUpcomingLaunches();
-        populateLaunchList(launches);
+        populateLaunchList([]);
       };
 
       main();
