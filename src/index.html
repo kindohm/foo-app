@@ -17,6 +17,15 @@
 
       const main = async () => {
         const launches = await fetchUpcomingLaunches();
+
+        var displayStrings = [];
+        for (var i = 0; i < launches.length; i++) {
+          displayStrings.push(
+            "Name: " + launches[i].name + ", Date: " + launches[i].date_utc
+          );
+        }
+
+        console.log(displayStrings);
       };
 
       main();
