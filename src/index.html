@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SpaceX Launches</title>
+  </head>
+  <body>
+    <h1>SpaceX Launches</h1>
+    <ul id="launch-list"></ul>
+
+    <script>
+      const API_BASE_URL = "https://api.spacexdata.com/v5/launches";
+
+      const fetchUpcomingLaunches = async () => {
+        const url = `${API_BASE_URL}/upcoming`;
+        const response = await fetch(url);
+        return await response.json();
+      };
+
+      const populateLaunchList = (launches) => {
+        const list = document.getElementById("launch-list");
+
+        launches.forEach((launch) => {
+          const item = document.createElement("li");
+          const text = document.createTextNode(launch.name);
+          item.appendChild(text);
+          list.appendChild(item);
+        });
+      };
+
+      const main = async () => {
+        const launches = await fetchUpcomingLaunches();
+        populateLaunchList(launches);
+      };
+
+      main();
+    </script>
+  </body>
+</html>

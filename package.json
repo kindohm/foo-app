@@ -1,0 +1,11 @@
+{
+  "name": "foo-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:kindohm/foo-app.git",
+  "author": "Mike Hodnick <mike.hodnick@thrivent.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
